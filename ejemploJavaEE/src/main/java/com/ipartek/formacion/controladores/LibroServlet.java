@@ -12,15 +12,15 @@ import javax.servlet.http.HttpServletResponse;
 import com.ipartek.formacion.pojos.Libro;
 
 @WebServlet("/libros")
-public class LibrosServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+public class LibroServlet extends HttpServlet {
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * 
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	private static final long serialVersionUID = -5387634321784772692L;
+
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HashMap<Long, Libro> libros = new HashMap<>();
 
 		for (Long i = 1L; i <= 3L; i++) {
@@ -28,14 +28,12 @@ public class LibrosServlet extends HttpServlet {
 
 		}
 
-		request.setAttribute("libros", libros);
+		req.setAttribute("libros", libros);
 
-		request.getRequestDispatcher("index.jsp").forward(request, response);
+		req.getRequestDispatcher("index.jsp").forward(req, resp);
 	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		doGet(request, response);
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		doGet(req, resp);
 	}
-
 }

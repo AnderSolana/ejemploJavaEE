@@ -1,8 +1,9 @@
 package com.ipartek.formacion.controladores;
 
 import java.io.IOException;
-import java.util.HashMap;
+import java.util.TreeMap;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,14 +22,14 @@ public class LibroServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		HashMap<Long, Libro> libros = new HashMap<>();
-
+		TreeMap<Long, Libro> libros = new TreeMap<>();
+		ServletContext application = req.getServletContext();
 		for (Long i = 1L; i <= 3L; i++) {
 			libros.put(i, new Libro(i, "Libro " + i, "Editorial " + i, "123456789101" + i, 15 + i));
 
 		}
-
-		req.setAttribute("libros", libros);
+		
+		application.setAttribute("libros", libros);
 
 		req.getRequestDispatcher("index.jsp").forward(req, resp);
 	}

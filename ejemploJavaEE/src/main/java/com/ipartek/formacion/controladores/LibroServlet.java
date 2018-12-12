@@ -22,11 +22,19 @@ public class LibroServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		TreeMap<Long, Libro> libros = new TreeMap<>();
+		
+		@SuppressWarnings("unchecked")
+		TreeMap<Long, Libro> libros = 
+				(TreeMap<Long, Libro>) req.getServletContext().getAttribute("libros");
 		ServletContext application = req.getServletContext();
-		for (Long i = 1L; i <= 3L; i++) {
-			libros.put(i, new Libro(i, "Libro " + i, "Editorial " + i, "123456789101" + i, 15 + i));
+		if(libros == null) {
+			libros = new TreeMap<>();
+			
+			for (Long i = 1L; i <= 3L; i++) {
+				libros.put(i, new Libro(i, "Libro " + i, "Editorial " + i, "123456789101" + i, 15 + i));
 
+			}
+			
 		}
 		
 		application.setAttribute("libros", libros);

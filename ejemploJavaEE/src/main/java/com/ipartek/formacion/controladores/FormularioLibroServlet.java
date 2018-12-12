@@ -63,6 +63,7 @@ public class FormularioLibroServlet extends HttpServlet {
 				(TreeMap<Long, Libro>) req.getServletContext().getAttribute("libros");
 		
 		if(libros == null) {
+			
 			resp.sendRedirect("libros");
 			return;
 		}
@@ -75,16 +76,16 @@ public class FormularioLibroServlet extends HttpServlet {
 		}
 		
 		switch(accion) {
-		case "insertar": 
+		case "insertar": System.out.println("Insertar");
 		case "editar": 
-			Libro libro = new Libro(idLong, titulo, editorial, isbn, Double.parseDouble(precio));
-			libros.put(libro.getId(), libro);
+			Libro l = new Libro(idLong, titulo, editorial, isbn, Double.parseDouble(precio));
+			libros.put(l.getId(), l);
 			break;
 		case "borrar": libros.remove(Long.parseLong(id)); break;
 		default: throw new ServletException("Opción no definida");
 		}
 		
-		resp.sendRedirect("noticias");
+		resp.sendRedirect("libros");
 	}
 
 }

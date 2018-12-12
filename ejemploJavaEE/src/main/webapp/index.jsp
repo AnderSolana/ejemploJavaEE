@@ -21,5 +21,6 @@
 		</tr>
 	</c:forEach>
 	</table>
+	<h3><a href="formulariolibro?accion=insertar">Crear nuevo libro</a></h3>
 </body>
 </html>
